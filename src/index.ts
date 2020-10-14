@@ -1,4 +1,5 @@
 export interface SimpleChange<T> {
+  propertyKey: PropertyKey;
   firstChange: boolean;
   previousValue: T;
   currentValue: T;
@@ -33,6 +34,7 @@ export function OnChange<T = any>(callback: CallBackFunction<T> | string) {
         const oldValue = this[cachedValueKey];
         this[cachedValueKey] = value;
         const simpleChange: SimpleChange<T> = {
+          propertyKey: key,
           firstChange: this[isFirstChangeKey],
           previousValue: oldValue,
           currentValue: this[cachedValueKey],
